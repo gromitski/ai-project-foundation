@@ -53,7 +53,7 @@ Adjust for your stack (e.g. `app/`, `lib/`, `content/`).
 
 | Path | Purpose |
 | ---- | ------- |
-| `docs/00–10*.md` | Numbered operational guides |
+| `docs/00–11*.md` | Numbered operational guides |
 | `docs/ai/` | AI collaboration docs |
 | `docs/audits/` | Investigation and audit reports |
 | `docs/decisions/` | ADRs |
@@ -81,7 +81,7 @@ Typically gitignored:
 - Local logs and exports
 - `.cursor/` — **unless** this project commits rules intentionally
 
-See [`.gitignore`](../.gitignore) and [`TEMPLATE_NOTES.md`](../TEMPLATE_NOTES.md).
+See [`.gitignore`](../.gitignore) and [`docs/11-using-this-template.md`](11-using-this-template.md).
 
 ---
 

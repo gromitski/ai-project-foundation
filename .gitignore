@@ -22,7 +22,8 @@ npm-debug.log*
 # Raw source dumps — customise path
 data/raw/
 
-# Generated AI handoff (optional — commit if you want memory in repo)
+# Generated AI handoff — default: ignore and regenerate locally.
+# To track the bundle in Git instead, remove this line and document the choice in docs/10-folder-guide.md.
 docs/ai/01-ai-project-memory.md
 
 # Local exports and scratch
@@ -30,5 +31,5 @@ docs/ai/01-ai-project-memory.md
 exports/
 
 # Cursor: this template COMMITS .cursor/rules/ so agent guidance travels with the repo.
-# Individual product repos may gitignore .cursor/ instead — see TEMPLATE_NOTES.md.
+# Individual product repos may gitignore .cursor/ instead — see docs/10-folder-guide.md.
 # .cursor/
