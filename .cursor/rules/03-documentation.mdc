@@ -1,0 +1,64 @@
+---
+description: Manually maintained docs, audit reports, README vs deep docs, no auto-rewrite
+alwaysApply: true
+---
+
+# Documentation workflow
+
+The `<docs-dir>/` folder is **practical operational documentation** for future maintenance and orientation.
+
+It covers architecture, structure, deployment, commands, troubleshooting, and rationale.
+
+## Default behaviour
+
+- **Read** `<docs-dir>/` for project context and constraints.
+- **Follow** documented decisions.
+- **Do not** proactively rewrite, reorganise, improve, summarise, or regenerate documentation during unrelated implementation tasks unless the user explicitly asks.
+
+Treat `<docs-dir>/` as **human-written reference** — not AI-generated product documentation.
+
+## When to edit docs
+
+- When the user explicitly asks to update documentation.
+- When the task explicitly includes documentation as deliverable.
+- Small, factual updates to the relevant doc when code changes **documented behaviour** (keep in scope).
+
+## README vs deep docs
+
+- **README** — project entry point, quick start, high-level index.
+- **`<docs-dir>/`** — deeper operational notes for returning after time away.
+
+Do not duplicate or replace `<docs-dir>/` content in the README during coding tasks.
+
+## Lengthy investigations and audits
+
+When producing a **lengthy audit** (inventories, readiness reviews, multi-section investigations, pre-launch checklists with findings):
+
+1. Write a dated markdown file under `<docs-dir>/audits/` in the appropriate subfolder (see `<docs-dir>/audits/README.md`).
+2. **Filename:** `YYYY-MM-DD-short-topic-audit.md` (or `-report.md`).
+3. **Header:** date, scope, method, and “audit only — no code changes” when applicable.
+4. **Chat output:** keep the user-facing reply concise; point to the saved file path.
+
+Do not write new audit markdown in ad-hoc paths unless the user instructs otherwise.
+
+## Superseded docs
+
+Mark superseded planning docs clearly (status table or banner). Do not treat superseded backlogs as active scope.
+
+## vs Cursor rules
+
+- **`.cursor/rules/`** — agent behaviour shorthand (may be committed or local per project).
+- **`<docs-dir>/`** — project documentation any developer can read from the repository.
+
+Keep deployment truth in `<docs-dir>/`; keep post-push validation shorthand in Cursor rules where helpful.
+
+## AI project memory
+
+When the user asks to **update the documentation memory file** or similar:
+
+1. Run `node scripts/generate-ai-project-memory.mjs` (or project npm script if wired).
+2. This overwrites the generated file (default: `<docs-dir>/ai/01-ai-project-memory.md`) only.
+3. Do not replace or rewrite other docs in `<docs-dir>/`.
+4. Commit the regenerated file only when the user asks.
+
+See `<docs-dir>/ai/00-ai-memory-core.md`.

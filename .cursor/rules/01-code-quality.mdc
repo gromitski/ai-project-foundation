@@ -1,0 +1,38 @@
+---
+description: Code change discipline — focused diffs, reuse conventions, verify meaningful changes
+alwaysApply: true
+---
+
+# Code quality
+
+## Conventions
+
+- Read surrounding code before editing; match existing naming, types, imports, and documentation level.
+- **Reuse existing abstractions** before creating new ones.
+- Keep diffs **focused** — do not change unrelated files.
+
+## Comments and clarity
+
+- Prefer self-explanatory code.
+- Add comments only where they clarify non-obvious business logic or non-obvious technical constraints.
+- Prefer maintainable code over clever code.
+
+## Verification
+
+- Run relevant tests, lint, or build checks for meaningful changes when the project provides them.
+- Report what was verified and what was not.
+
+## Quality flags
+
+When relevant, flag concerns about:
+
+- **Security** — secrets, unsafe input handling, auth boundaries
+- **Accessibility** — keyboard, focus, semantics, contrast, motion
+- **Performance** — payload size, bundle size, perceived responsiveness
+
+See `04-accessibility-performance.mdc` before optimising for audit scores.
+
+## Visual or UI work
+
+- Reuse existing shared styles, tokens, or components before adding one-off styles.
+- Do not change behaviour during styling-only tasks unless explicitly requested.

@@ -1,0 +1,70 @@
+---
+description: Git branches, promotion flow, commit standards, and explicit production approval
+alwaysApply: true
+---
+
+# Git and release
+
+Canonical detail lives in `<docs-dir>/04-git-workflow.md` and `<docs-dir>/09-release-procedure.md`. This rule is agent shorthand.
+
+## Branches (customise per project)
+
+| Branch | Shorthand | Role |
+| ------ | --------- | ---- |
+| `<development-branch>` | **dev** | Day-to-day work |
+| `<staging-branch>` | **staging** | Pre-production verification (optional) |
+| `<primary-branch>` | **main** / **production** | Production deploy target |
+
+## User shorthand (agent must follow)
+
+| User says | Meaning |
+| --------- | ------- |
+| **commit to dev** | Commit on `<development-branch>` and push only that branch |
+| **commit to staging** | Promote tested dev work to `<staging-branch>` and push |
+| **commit to main** | Promote tested work to `<primary-branch>` and push **only after explicit confirmation** |
+
+- Never treat staging or dev success as permission to push production.
+- “Staging” means `<staging-branch>`, not `<development-branch>`, when both exist.
+
+## Promotion flow (template)
+
+1. Work on `<development-branch>`
+2. Commit and push when asked
+3. Test development environment
+4. Fast-forward `<staging-branch>` to match tested dev (if used)
+5. Test staging environment
+6. **Only after explicit approval**, fast-forward `<primary-branch>` and push
+
+Prefer **fast-forward or direct ref push**. Avoid merge commits on promotion branches unless the project documents otherwise.
+
+## Before committing
+
+- Run `git status` and review staged files.
+- Stage intended files only.
+- **Never commit unless the user explicitly asks.**
+
+## Before production push
+
+- Confirm the user explicitly wants production updated.
+- Confirm `<production-domain>` is the intended target.
+- Confirm staging was tested if the project uses it.
+- Do not change production env vars without explicit approval.
+
+## Commit messages
+
+- Imperative subject line, specific outcome (≤ ~72 chars when possible).
+- Body when useful: what changed, why, follow-ups left behind.
+
+## Destructive Git
+
+- Do not run force-push, hard reset, or other destructive commands unless the user explicitly requests them.
+- Do not skip hooks unless the user explicitly requests it.
+
+## After push
+
+- Wait for CI/deploy if applicable.
+- Smoke-test the deployed URL(s) documented in `<docs-dir>/03-deployment.md`.
+
+## Security
+
+Follow `05-repository-hygiene.mdc`.

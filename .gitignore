@@ -1,0 +1,34 @@
+# Dependencies and build output (adjust per stack)
+node_modules/
+dist/
+build/
+.astro/
+.next/
+out/
+
+# Secrets and local env
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Raw source dumps — customise path
+data/raw/
+
+# Generated AI handoff (optional — commit if you want memory in repo)
+docs/ai/01-ai-project-memory.md
+
+# Local exports and scratch
+*.local
+exports/
+
+# Cursor: this template COMMITS .cursor/rules/ so agent guidance travels with the repo.
+# Individual product repos may gitignore .cursor/ instead — see TEMPLATE_NOTES.md.
+# .cursor/

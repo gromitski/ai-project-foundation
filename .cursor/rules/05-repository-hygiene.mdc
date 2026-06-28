@@ -1,0 +1,42 @@
+---
+description: Never publish secrets, raw dumps, or accidental local files
+alwaysApply: true
+---
+
+# Repository hygiene
+
+Before every commit and push, ensure nothing sensitive or unintended leaves the machine.
+
+## Never commit or push
+
+- **Secrets:** `.env`, API keys, tokens, passwords, certificates, credentials files, auth tokens in config
+- **Personal / local setup:** IDE scratch paths, machine-specific paths, accidental screenshots of private systems — unless the project **intentionally** tracks shared editor config
+- **Raw source dumps:** large upstream datasets, exports, or dumps meant to stay local (customise path in `.gitignore`)
+- **Accidental artefacts:** logs, crash reports, database exports, local QA captures
+
+## Generated files
+
+Keep policy explicit per project:
+
+- Some generated outputs are committed (built static assets, compiled data for CI).
+- Some are regenerated locally and gitignored (AI memory bundle, local reports).
+
+Document the policy in `<docs-dir>/10-folder-guide.md`.
+
+## Prefer generic project docs
+
+In README and committed code:
+
+- Avoid hardcoding personal clone URLs or machine-specific paths unless essential
+- Use `git remote -v` / `origin` instead of embedding clone URLs in docs when possible
+
+## Before commit
+
+- Review `git diff --staged`.
+- When in doubt, do not add the file; extend `.gitignore` if needed.
+
+## Allowed in the repo
+
+- Application source, types, and build scripts
+- Generated project outputs **when** they contain no secrets and the project documents why they are committed
+- `.env.example` with placeholder keys only (no real values)

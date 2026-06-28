@@ -1,0 +1,54 @@
+---
+description: Accessibility and performance priorities — evidence first, user experience over audit scores
+alwaysApply: true
+---
+
+# Accessibility and performance
+
+Optimise from **measured evidence** and **user experience**, not audit scores alone.
+
+## Priority order
+
+1. **User-perceived responsiveness** — time to useful UI, interaction latency, reliability on slow networks
+2. **Accessibility** — keyboard, focus, screen readers, semantics, contrast, motion
+3. **Network payload size** — data, images, third-party requests
+4. **Bundle size** — JS/CSS delivered with the app
+5. **Lighthouse or similar audit scores** — useful signal, lowest priority
+
+Do not add complexity solely to improve audit scores.
+
+## Before suggesting or implementing a performance change
+
+State all four:
+
+| Step | Question |
+| ---- | -------- |
+| **Resource** | What exact file, request, or chunk? |
+| **Size** | How large? Raw and compressed where relevant |
+| **User benefit** | What feels faster or more reliable? Be specific |
+| **Trade-off** | Complexity, maintenance, behaviour change, SEO, or a11y impact |
+
+If any step is unknown, **measure first** — do not guess.
+
+## Accessibility expectations
+
+- Semantic HTML and meaningful labels where applicable
+- Keyboard-operable primary flows
+- Visible focus indicators
+- Respect `prefers-reduced-motion` where animations exist
+- Do not overclaim conformance in user-facing copy without audit evidence
+
+Flag regressions and trade-offs explicitly.
+
+## Perceived performance
+
+- First useful interaction matters more than perfect final paint in many apps.
+- Loading and error states should be understandable and recoverable.
+
+## Avoid
+
+- Speculative micro-optimisations without a measured bottleneck
+- Optimising for metrics users will not notice
+- Bundle tweaks before addressing larger network payloads when data dominates transfer
+
+Committed reference: `<docs-dir>/06-accessibility.md`, `<docs-dir>/07-performance.md`.

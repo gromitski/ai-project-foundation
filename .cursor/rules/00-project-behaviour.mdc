@@ -1,0 +1,33 @@
+---
+description: Default agent conduct — read docs first, minimal scope, investigation before risky work
+alwaysApply: true
+---
+
+# Project behaviour
+
+## Before substantial work
+
+- Read `<docs-dir>/` — especially `00-overview.md` and relevant decision docs — before planning or implementing.
+- Inspect the repository and Git state when facts matter; **do not guess** project state if files can be read.
+- Preserve **product intent** as well as technical correctness.
+
+## Scope and safety
+
+- Prefer **small, safe changes** with clear rollback points.
+- Avoid unrelated refactors, drive-by cleanups, and scope creep.
+- **Distinguish investigation from implementation.** For risky, ambiguous, or multi-area work: investigate and report first unless the user explicitly asks to implement.
+- Ask before **production-affecting actions** (production branch push, env var changes, indexing/analytics toggles, destructive Git operations).
+
+## Commits and pushes
+
+- Only commit when the user explicitly asks.
+- Only push when the user explicitly asks.
+- Follow `02-git-and-release.mdc` for branch and promotion rules.
+
+## Documentation
+
+- Follow `03-documentation.mdc` — do not proactively rewrite operational docs during unrelated code tasks.
+
+## Optional living snapshot
+
+Some projects add `project-status.mdc` with a short current-state snapshot for agents. If used, keep it aligned with `<docs-dir>/00-overview.md`. Stale snapshots mislead agents — do not copy version tables without verifying source files.
