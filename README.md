@@ -109,6 +109,204 @@ Current project memory:
 The original project idea is archived under `evidence/origin/`.
 ```
 
+### After initialisation
+
+You should now have:
+
+```text
+memory/intent.md
+memory/now.md
+memory/agreements.md
+evidence/origin/YYYY-MM-DD-origin.md
+```
+
+The AI does **not** commit during initialisation unless you separately authorise it.
+
+Your next steps:
+
+1. Read `memory/intent.md`.
+2. Correct any misunderstood purpose, scope or assumptions.
+3. Read `memory/now.md`.
+4. Check that the next safe action is realistic.
+5. Review the Git diff.
+6. Commit the initial foundation only when satisfied.
+7. Begin the proposed first slice.
+
+## Your first session after initialisation
+
+The foundation is ready. No further setup is necessarily required. You do not need to create architecture, deployment, testing or roadmap files immediately. Begin useful work by asking for one focused slice. The AI should inspect current memory before proposing or implementing changes.
+
+Copy this prompt to any assistant that can access the repository:
+
+```markdown
+Read `memory/agreements.md`, `memory/now.md` and `memory/intent.md`.
+
+Briefly tell me:
+
+1. What the project is trying to achieve.
+2. What exists right now.
+3. What remains uncertain.
+4. What the next safe action is.
+
+Then help me complete that next action as one focused slice.
+
+Read additional files only when `memory/now.md` points to them or the task clearly requires them. Do not create new permanent documentation unless the work exposes a real need.
+```
+
+## Starting each new AI session
+
+Conversational memory is not project memory. Each fresh session should resume from the repository.
+
+At the beginning of a session, a repository-aware AI should read:
+
+```text
+memory/agreements.md
+memory/now.md
+memory/intent.md
+```
+
+It should then follow only relevant pointers from `memory/now.md`.
+
+```markdown
+Resume this project from the repository rather than previous chat history.
+
+Read:
+
+- `memory/agreements.md`
+- `memory/now.md`
+- `memory/intent.md`
+
+Follow only the pointers relevant to the active task.
+
+Summarise the current state and wait for my instruction before making changes.
+```
+
+You do not need to paste the full repository into chat. Repository-aware tools can inspect files directly. Review what the AI claims it has read. Assistants should not assume old chat history is current.
+
+## What should the AI read?
+
+Context should match the task.
+
+### Repository-aware agent
+
+Examples: Cursor, Claude Code, repository-connected ChatGPT, agents with local or GitHub access.
+
+Start with `memory/agreements.md`, `memory/now.md` and `memory/intent.md`. Add files linked from `memory/now.md`, task-relevant source code, and relevant specialist files. Do not read every file by default.
+
+### Chat-only assistant
+
+Provide the three canonical memory files plus relevant code, errors, and any specialist document needed. Upload or paste them.
+
+### Small one-off question
+
+The full spine may be unnecessary. A CSS bug may need only the component and stylesheet. Scope questions need `memory/intent.md`. “What next?” questions need `memory/now.md`.
+
+## Keeping token and credit use under control
+
+The foundation does not control vendor pricing, indexing or context windows. Tools charge and load context differently. Repository indexing may happen outside files you explicitly attach to a conversation.
+
+The foundation reduces repeated context by keeping canonical memory small, avoiding generated full-repository bundles, keeping evidence outside normal context, and using `memory/now.md` to route agents to relevant material.
+
+Practical guidance: keep `memory/now.md` concise; avoid “read the entire repository” prompts; ask for targeted inspection; start a new conversation when context has drifted; use cheaper models for mechanical work; review auto-attached context in tools that expose it.
+
+```markdown
+Use the minimum context needed for this task.
+
+Start with `memory/agreements.md`, `memory/now.md` and `memory/intent.md`.
+
+Inspect only the files directly relevant to the active work. Do not perform a broad repository review unless you find a concrete dependency or I explicitly ask for one.
+```
+
+## Using different AI tools
+
+**Cursor** — the tracked rule directs Cursor to canonical memory. It is short and does not contain full project history. Cursor may inspect additional code when the task requires it.
+
+**Claude Code** — works without conversion. Use ordinary Markdown memory and the session-opening prompt. `CLAUDE.md` is optional; do not duplicate `memory/agreements.md` into it.
+
+**Other repository-aware assistants** — connect repository access where supported, point to canonical memory, use the session-opening prompt. Behaviour varies by product and model.
+
+**Chat-only tools** — upload or paste the three canonical memory files plus task-relevant code and specialist material.
+
+No official vendor integration is implied.
+
+## How project files evolve
+
+The foundation is not a background service. Files change when you instruct an AI to work and it follows the agreements.
+
+- **`memory/intent.md`** — update when durable intent changes. Not every task.
+- **`memory/now.md`** — update when current reality or next action changes. Not a daily diary.
+- **`memory/agreements.md`** — change rarely.
+- **Specialist files** — create when a repeated or complex need appears.
+- **Evidence files** — investigations, audits, origin material, migration reports; outside default context.
+
+Git history covers ordinary change. A permanent report is not needed for every task.
+
+The foundation provides canonical locations, reading order, working expectations, update triggers, and privacy safeguards. It does **not** provide autonomous agents, guaranteed model behaviour, automatic commits, automatic memory updates, or protection from incorrect output without human review. Review diffs, memory updates, verification, and commit metadata.
+
+## Example working prompts
+
+### Start a focused slice
+
+```markdown
+Read the canonical project memory and help me complete the next safe action as one focused slice.
+
+Before changing anything:
+
+1. Summarise the intended outcome.
+2. Identify the files likely to be involved.
+3. State any material uncertainty.
+4. Propose how the result will be verified.
+
+Keep changes proportionate. Update `memory/now.md` if project reality changes. Do not commit or push unless I explicitly ask.
+```
+
+### Ask for investigation before implementation
+
+```markdown
+Investigate this problem before implementing a fix.
+
+Read the canonical memory, inspect only relevant files, identify the most likely cause, and report:
+
+- evidence
+- risks
+- recommended next action
+- whether implementation is safe yet
+
+Do not change files during the investigation.
+```
+
+### End a slice cleanly
+
+```markdown
+Review the completed work against the original objective.
+
+Run proportionate verification, then update `memory/now.md` only if the project's current reality or next safe action has changed.
+
+Report:
+
+- files changed
+- verification performed
+- remaining uncertainty
+- proposed next action
+
+Do not create a separate report unless the findings need durable evidence.
+```
+
+### Use a chat-only AI
+
+```markdown
+I am providing:
+
+- `memory/agreements.md`
+- `memory/now.md`
+- `memory/intent.md`
+- the files relevant to this task
+
+Treat repository memory as authoritative over assumptions from previous chats.
+
+Answer using only the supplied evidence. Tell me if a missing file materially prevents a reliable answer.
+```
+
 ## How memory works
 
 - **`memory/intent.md`** — why the project exists.
@@ -116,10 +314,6 @@ The original project idea is archived under `evidence/origin/`.
 - **`memory/agreements.md`** — safe working expectations.
 
 Specialist depth is added only when needed. Evidence lives under `evidence/`. Decisions are recorded only when they justify a permanent home. Generated AI context is **not** part of the foundation — canonical memory is small enough to read directly.
-
-## Designed for multiple AIs
-
-Project truth is vendor-neutral Markdown. Cursor gets one thin rule pointing to canonical memory. Other repository-aware assistants read the same files. No AI needs retained conversational memory or a permanent exclusive role. Different models will behave differently; the foundation gives them the same evidence.
 
 ## Engineering baseline
 
@@ -132,6 +326,28 @@ Add specialist memory when real needs appear: architecture, development setup, d
 ## Existing projects
 
 Do not copy the whole foundation over an established repository. Add the `memory/` spine, point to useful existing docs, remove duplicates only after review, keep historical evidence outside default context, and rewrite Git history only when privacy or attribution debt justifies it.
+
+## Common questions
+
+**Do I give every AI the whole repository?** No — begin with canonical memory; inspect task-relevant files only.
+
+**Will memory files consume lots of credits?** Some, like any text — but they are concise. Broad repository reading and long chats cost more.
+
+**Does the foundation update itself?** No — agents update files during instructed work, subject to review.
+
+**Must I use Cursor?** No — Cursor has a convenience rule; memory is vendor-neutral.
+
+**Can I use several AIs?** Yes — same repository truth; avoid concurrent uncoordinated edits.
+
+**Must every task update memory?** No — only meaningful intent, reality or next-action changes.
+
+**Create all specialist folders now?** No — trigger-based only.
+
+**Let an AI commit automatically?** Only when explicitly authorised, after reviewing identity, diff and verification.
+
+**When an AI gets something wrong?** Correct canonical memory and the artefact; do not rely on the old chat.
+
+**Can a team use this?** Yes — treat canonical memory like code and review changes.
 
 ## Current status
 
