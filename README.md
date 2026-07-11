@@ -10,11 +10,12 @@ This foundation provides a **small durable memory spine** rather than a large pr
 
 ## What it gives you
 
-Day zero, five files:
+Day zero, six files:
 
 ```text
 README.md
 START.md
+LICENSE
 .gitignore
 memory/agreements.md
 .cursor/rules/00-project-foundation.mdc
@@ -32,7 +33,7 @@ No stack is chosen. No hosting is assumed. No deployment docs are invented. No d
 
 ## Quick start
 
-1. Create a repository from this foundation or copy the five day-zero files.
+1. Create a repository from this foundation or copy the six day-zero files.
 2. Replace the body of [`START.md`](START.md) with rough project intent.
 3. Copy the initialisation instruction below into an AI assistant.
 4. Review the interpreted memory and proposed first slice.
@@ -138,4 +139,6 @@ Early but usable — **v0.3**. Validated on a fictional concept project and a re
 
 ## Licence and reuse
 
-A formal open-source licence has not yet been selected. The repository is public for inspection and experimentation, but reuse rights remain reserved until a licence is added.
+AI Project Foundation is available under the [MIT License](LICENSE).
+
+You may use, copy, modify and distribute it under the terms of that licence.
