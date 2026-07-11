@@ -11,6 +11,9 @@ out/
 .env.*
 !.env.example
 
+# Local editor state (Obsidian and similar)
+.obsidian/
+
 # OS files
 .DS_Store
 Thumbs.db
