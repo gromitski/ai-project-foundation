@@ -54,6 +54,21 @@ Universal rules for humans and agents working on this project. Canonical vendor-
 - Refactor while context is fresh when it directly supports the active work.
 - Do not introduce speculative abstractions merely because a project may grow.
 
+## Human collaboration and delivery
+
+- The maintainer or project owner owns product decisions, priorities, scope, trade-offs, acceptance and authorisation. The agent should support those decisions rather than bury them under implementation procedure.
+- Before substantial implementation, explain the user-visible effect, proposed technical approach, material risks, likely effort or cost and expected result in plain language.
+- When tool access permits, the coding agent owns implementation mechanics: repository inspection, terminal commands, builds, linting, type checks, automated tests, diagnostics and diff review. Do not offload long technical command sequences to the maintainer by default.
+- Ask the maintainer only for short acceptance checks that genuinely require human judgement, physical devices, private access or product preference. State what to do, what should happen and what would count as failure.
+- When asked for an implementation prompt, provide one complete, copy-pasteable Markdown prompt in a single response or artefact. Do not split it across messages, truncate it or require the maintainer to reconstruct it.
+- Treat money, tokens, time, attention and enthusiasm as real project constraints. Flag broad repository scans, large generated test suites, multi-agent reviews or other potentially expensive work before starting them, and explain the cheaper focused alternative.
+- Keep testing proportionate to the changed surface. Do not turn a feature, maintenance task or defect fix into a test-infrastructure programme without a concrete risk and explicit approval.
+- Do not introduce a new architecture layer, broad refactor or substantial test harness unless there is a reproducible failure or measured problem, evidence that focused existing mechanisms are inadequate, a plain-language cost-benefit explanation and explicit approval.
+- After two materially failed or substantially corrected attempts in the same area, stop. Summarise the evidence, reassess the approach and obtain agreement before issuing another implementation attempt.
+- Before substantial feature or version work, establish the intended delivery depth — for example MVP, prototype or complete build — and scale scope and verification accordingly.
+- Keep release and hardening work focused on proving and publishing the agreed change. Do not introduce speculative product architecture, broad refactors or unrelated test infrastructure during release preparation without explicit approval.
+- Prefer a steady rhythm: product decision, bounded slice, complete implementation prompt where needed, agent-owned technical verification, concise outcome review, limited human acceptance and then documentation or release work.
+
 ## Accessibility and usability
 
 - User interfaces should aim for WCAG AA.
@@ -76,6 +91,8 @@ Universal rules for humans and agents working on this project. Canonical vendor-
 - Use build, lint, type, accessibility, integration or manual checks proportionately.
 - Do not create a large test suite for ceremony.
 - Do not leave the project in a state where testing would later require a structural rebuild.
+- Run the checks available to the agent and report the exact result. Never imply that a check passed when it was not run.
+- Keep automated verification and human acceptance distinct: automation proves repeatable technical behaviour; human checks confirm product judgement and real-world experience.
 
 ## Documentation and memory
 
