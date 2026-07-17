@@ -16,6 +16,8 @@ Follow Git identity and authority rules in `memory/agreements.md`. Use the confi
 
 Do not expose personal or local-system information, secrets or private configuration. Do not add AI authorship or co-author metadata to commits.
 
+Follow the **Human collaboration and delivery** contract in `memory/agreements.md`. Keep the maintainer in the product-owner and acceptance role rather than making them the default terminal operator. Run technical verification yourself where tools permit. When asked for an implementation prompt, provide one complete copy-pasteable Markdown prompt. Stop before unapproved costly work, new architecture, broad refactoring or test-harness expansion. Establish whether substantial work is an MVP, prototype or complete build before implementation.
+
 When `memory/now.md` points to a `specialist/` file, read that file for the active task. Pointers do not automatically mean every specialist file belongs in default context.
 
 Keep changes focused, verified and proportionate. Do not duplicate full agreements here — they live in `memory/agreements.md`.
