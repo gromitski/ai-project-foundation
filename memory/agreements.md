@@ -33,16 +33,21 @@ Universal rules for humans and agents working on this project. Canonical vendor-
 ## Git identity and authority
 
 - Use the maintainer's configured privacy-safe Git identity for commits.
-- Inspect author and committer metadata before pushing.
+- Inspect the complete commit subject, body, trailers, author and committer metadata after every commit and every amend, before the first push.
 - Warn if the configured identity appears to expose a personal email address.
 - Do not print unsafe identity values in full.
 - Do not commit using an unreviewed privacy-unsafe identity.
 - Do not commit, push, merge, tag, release, deploy, rewrite history or perform destructive Git operations unless explicitly authorised for that task.
 - Inspect branch and working-tree state first.
 - Use descriptive commit messages.
-- Do not add Cursor, cursoragent, ChatGPT or another AI as author, committer or co-author.
-- Do not add `Co-authored-by` trailers.
+- Do not add Cursor, cursoragent, ChatGPT, Claude, Copilot, Gemini, Grok, OpenAI or another AI identity as author, committer or co-author.
+- Do not add AI attribution in a commit subject, body or trailer, including `Co-authored-by`, `Generated-by`, `Authored-by`, `Assisted-by` or equivalent declarations.
+- Ordinary technical references to AI tools in commit prose are allowed when they describe the project rather than claim authorship.
 - Do not expose PII through commit metadata.
+- In every fresh clone, run `node scripts/no-ai-attribution.mjs install` before the first commit or push, then run `node scripts/no-ai-attribution.mjs self-test`.
+- Run `node scripts/no-ai-attribution.mjs commit HEAD` after committing or amending. An attribution failure is a hard stop before push.
+- If an editor or agent automatically adds attribution, do not push it. Recreate or amend the commit with clean human authorship metadata and verify it again.
+- Never accept an attribution-check failure as a harmless warning.
 
 ## Scope and implementation
 
@@ -56,7 +61,7 @@ Universal rules for humans and agents working on this project. Canonical vendor-
 
 ## Human collaboration and delivery
 
-- The maintainer or project owner owns product decisions, priorities, scope, trade-offs, acceptance and authorisation. The agent should support those decisions rather than bury them under implementation procedure.
+- The maintainer or project owner owns product decisions, priorities, scope, trade-offs, acceptance and authorisation. The agent should support those decisions rather than burying them under implementation procedure.
 - Before substantial implementation, explain the user-visible effect, proposed technical approach, material risks, likely effort or cost and expected result in plain language.
 - When tool access permits, the coding agent owns implementation mechanics: repository inspection, terminal commands, builds, linting, type checks, automated tests, diagnostics and diff review. Do not offload long technical command sequences to the maintainer by default.
 - Ask the maintainer only for short acceptance checks that genuinely require human judgement, physical devices, private access or product preference. State what to do, what should happen and what would count as failure.
