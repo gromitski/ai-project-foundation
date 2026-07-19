@@ -5,6 +5,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const ZERO_SHA = /^0{40}$/;
+const MANAGED_HOOK_MARKER = "# managed by scripts/no-ai-attribution.mjs";
 const AI_IDENTITY = /\b(?:cursor|cursoragent|chatgpt|claude|copilot|gemini|grok|openai|anthropic)\b/i;
 const AI_EMAIL = /(?:cursoragent@cursor\.com|(?:cursor|chatgpt|claude|copilot|gemini|grok|openai|anthropic)[^@\s]*@)/i;
 const ATTRIBUTION_LINE = /^(?:co-authored-by|generated-by|authored-by|assisted-by|written-by):\s*(.+)$/gim;
@@ -83,6 +84,20 @@ function reportCommitFailures(results) {
   process.exit(1);
 }
 
+function writeManagedHook(filePath, content) {
+  if (fs.existsSync(filePath)) {
+    const existing = fs.readFileSync(filePath, "utf8");
+    if (!existing.includes(MANAGED_HOOK_MARKER)) {
+      throw new Error(
+        `Refusing to overwrite existing hook ${filePath}. Integrate the attribution check manually or remove the hook deliberately.`,
+      );
+    }
+  }
+
+  fs.writeFileSync(filePath, content, { mode: 0o755 });
+  fs.chmodSync(filePath, 0o755);
+}
+
 function installHooks() {
   const repoRoot = runGit(["rev-parse", "--show-toplevel"]);
   const hooksPath = runGit(["rev-parse", "--git-path", "hooks"]);
@@ -91,15 +106,13 @@ function installHooks() {
     : path.resolve(repoRoot, hooksPath);
   fs.mkdirSync(hooksDir, { recursive: true });
 
-  const commitMsgHook = `#!/bin/sh\nrepo_root=$(git rev-parse --show-toplevel) || exit 1\nexec node "$repo_root/scripts/no-ai-attribution.mjs" message-file "$1"\n`;
-  const prePushHook = `#!/bin/sh\nrepo_root=$(git rev-parse --show-toplevel) || exit 1\nexec node "$repo_root/scripts/no-ai-attribution.mjs" pre-push "$@"\n`;
+  const commitMsgHook = `#!/bin/sh\n${MANAGED_HOOK_MARKER}\nrepo_root=$(git rev-parse --show-toplevel) || exit 1\nexec node "$repo_root/scripts/no-ai-attribution.mjs" message-file "$1"\n`;
+  const prePushHook = `#!/bin/sh\n${MANAGED_HOOK_MARKER}\nrepo_root=$(git rev-parse --show-toplevel) || exit 1\nexec node "$repo_root/scripts/no-ai-attribution.mjs" pre-push "$@"\n`;
 
   const commitMsgPath = path.join(hooksDir, "commit-msg");
   const prePushPath = path.join(hooksDir, "pre-push");
-  fs.writeFileSync(commitMsgPath, commitMsgHook, { mode: 0o755 });
-  fs.writeFileSync(prePushPath, prePushHook, { mode: 0o755 });
-  fs.chmodSync(commitMsgPath, 0o755);
-  fs.chmodSync(prePushPath, 0o755);
+  writeManagedHook(commitMsgPath, commitMsgHook);
+  writeManagedHook(prePushPath, prePushHook);
 
   console.log(`Installed no-AI-attribution hooks in ${hooksDir}`);
 }
